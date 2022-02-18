@@ -1,0 +1,16 @@
+footer {
+    background-color: #1d1c1b;
+    padding: 20px;
+}
+
+.social-round-icon {
+    height: 30px;
+    width: 30px;
+    margin: 5px;
+    color: #ffffffe6;
+    box-shadow: 0 0 2px rgb(207, 207, 207);
+}
+
+.social-round-icon:hover {
+    color: rgb(1, 116, 197);
+}

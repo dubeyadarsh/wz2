@@ -1,0 +1,209 @@
+.main{
+
+    background-color: #f0f4f7;
+}
+
+.intro {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    min-height: 80vh;
+    /* padding-top: 123px; */
+    /* padding-bottom: 96px; */
+}
+
+.container {
+    position: relative;
+    padding: 0 20px;
+}
+
+.text--center {
+    text-align: center;
+}
+.lefttopCircle{
+    border-radius: 50%;
+    height: 100px;
+    width: 100px;
+    background-color: rgb(240, 92, 92);
+    margin-top: 15%;
+    -webkit-animation:spin 4s linear infinite;
+    -moz-animation:spin 4s linear infinite;
+    animation:spin 4s linear infinite;
+}
+/* Given below is part of animation */
+@-moz-keyframes spin { 
+    100% { -moz-transform: rotate(360deg); } 
+}
+@-webkit-keyframes spin { 
+    100% { -webkit-transform: rotate(360deg); } 
+}
+@keyframes spin { 
+    100% { 
+        -webkit-transform: rotate(360deg); 
+        transform:rotate(360deg); 
+    } 
+}
+.circlesInLeft,.circlesInbottom{
+    border-radius: 50%;
+    height: 33px;
+    width: 33px;
+    background-color: #9e271f;
+    margin-left: auto;
+    margin-right: auto;
+    cursor: crosshair;
+   
+}
+
+.rightBottom{
+    position: relative;
+    top: 75%;
+    height: 100px;
+    width: 100px;
+    /* background-color: #000080; */
+    background-color: rgb(240, 92, 92);
+    margin-left: 60%;
+    /* border-radius: 70% 20% 70% 20%; */
+    border-radius: 50%;
+    -webkit-animation:spin 4s linear infinite;
+    -moz-animation:spin 4s linear infinite;
+    animation:spin 4s linear infinite;
+}
+.circlesInbottom{
+   margin-top: 40%;
+   animation: bouncing 0.5s ease 0s infinite alternate both;
+
+}
+@media screen and (max-width: 768px){
+    .rightBottom{
+        position: relative;
+        top: 0 !important;
+        left: 10%;
+    }
+    .intro{
+        height: 50vh;
+    }
+    .lefttopCircle{
+        margin-top: 10px;
+    }
+}
+
+.def{
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
+
+@media screen and (min-width: 960px){
+    .textp{
+        overflow: hidden;
+        border-right: .15em solid orange;
+        white-space: nowrap;
+        font-size: 1.0rem;
+        width: 0;
+        animation: typing 2.5s steps(50, end) forwards;
+      }
+      @keyframes typing {
+        from { width: 0 }
+        to { width: 89% }
+      }
+   
+}
+
+.pr{
+    font-size: 1.0rem;
+}
+
+
+.AboveFooter{ 
+    background-color: #3d445e; 
+    /* background-image: url(../img/bg7.jpg);
+    background-size: cover;
+    background-repeat: no-repeat; */
+  }
+
+  .between{
+    background-color: rgb(221,225,229);
+    padding-top: 80px;
+      }
+      
+    
+    .progressCircle{
+    border-radius: 50%;
+    height: 33px;
+    width: 33px;
+    background-color: #08084b;
+    }
+    .smallProg{
+        border-radius: 100px;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        background-color: #000080;
+        display: flex;
+        width: 300px;
+        flex-direction: row;
+        animation: bouncing 4s linear 0s 1 alternate both;
+    
+    
+    }
+    .bigProg{
+        border-radius: 100px;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        display: flex;
+        /* width: 300px; */
+        flex-direction: row;
+        background-color: #000080;
+        height: 33px;
+        animation: bouncing2 4s linear 0s 1 alternate both;
+    }
+    .bigProg p{
+        font-size: 0.7rem;
+        color: aliceblue;
+        margin-top: 3px;
+        display: none;
+    }
+    @keyframes bouncing{
+        0%{
+            width: 33px;
+        }
+        100%{
+           width: 20vw;
+           
+        }
+    }
+    @keyframes bouncing2{
+        0%{
+            width: 33px;
+            overflow: hidden;
+        }
+        100%{
+           width: 52vw;
+           overflow: hidden;
+        }
+    }
+    #hide,#hide2{
+        display: none;
+        margin-top: 4px;
+        margin-left: 4px;
+    }
+    .hide3{
+        display: none;
+    }
+    .anim{
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    }
+    @media screen and (max-width: 1060px){
+        .anim{
+            display: none;
+        }
+       
+    }

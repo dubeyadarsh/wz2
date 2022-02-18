@@ -1,0 +1,46 @@
+@media screen and (max-width: 620px){
+    .head{
+        width: 50% !important;
+    }
+}
+.he{
+    height: 10vh;
+}
+.head{
+    height: 10vh;
+    width: 18vw;
+}
+
+@media screen and (min-width: 960px){
+    .navbar{
+        height: 10vh;
+    }
+   
+}
+.navbar {
+    background-color: white;
+    
+}
+
+.top-icons {
+    font-size: 2em;
+    color: #4f4b48;
+}
+
+.top-icons:hover {
+    color: rgb(1, 116, 197);
+}
+
+.nav-links > li{
+    width: max-content;
+}
+
+.nav-links > li > a:hover {
+    font-weight: 600;
+    color: rgb(1, 116, 197) !important;
+}
+
+.nav-links > li > a {
+    color: #4f4b48 !important;
+    font-size: 1.0em;
+}
