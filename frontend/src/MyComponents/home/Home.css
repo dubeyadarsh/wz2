@@ -1,0 +1,27 @@
+.height{
+    min-height: 89.2vh;
+    margin-left: 0;
+    margin-right: 0;
+    
+}
+.cl{
+    background-color: rgba(149, 201, 201, 0.664);
+}
+.c2{
+    background-color: #f0f4f7;
+}
+.gt{
+    position: relative;
+    margin-top: 50%;
+}
+.newP, .view{
+    display: none;
+    min-height: 85vh;
+    min-width: 50vw;
+    position: absolute;
+    margin: auto;
+    left: 10%;
+    top: 3%;
+    background-color: rgba(11, 103, 241, 0.514);
+    border-radius: 20px;
+}

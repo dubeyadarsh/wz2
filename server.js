@@ -69,7 +69,7 @@ app.post("/register",async(req,res)=>{
     console.log(req.body);
     // console.log("u are called from frontend"+" "+req+" "+registerName+" "+ registerMail+" "+registerPass);
  
-    const data=  new user({name:registerName,username:registerMail,password: registerPass});
+    const data=  new user({_id:new mongoose.Types.ObjectId(),name:registerName,username:registerMail,password: registerPass});
     console.log(data);
     try{
     await data.save();
@@ -106,6 +106,31 @@ app.post('/login', passport.authenticate('local'),(req,res)=>{
        res.send(userProfile);
 
     });
+
+    app.post("/newproject",async(req,res)=>{
+      const userid=req.user.id;
+      const projectid=req.body.projectid;
+      const sDate=req.body.sDate;
+      const eDate=req.body.eDate;
+      const status=req.body.status;
+      const descp=req.body.descp;
+      console.log(userid+" "+projectid+" "+sDate+" "+eDate+" "+status+" "+descp)
+      user.findOneAndUpdate(
+        { _id:userid }, 
+        { $push: { 
+                  project: {
+                    _id :projectid,
+                    status: status,
+                    sdate: sDate,
+                    edate: eDate,
+                    description: descp
+                    }  
+                } 
+        }).exec()
+     
+      
+     console.log("updated");
+    })
 
 
 app.listen(port,()=>{

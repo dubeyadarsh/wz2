@@ -7,14 +7,19 @@ import './login.css';
 import { useNavigate } from 'react-router-dom';
 
 
+
 export const Login = () => {
 
     // Variable defined
     // Signup department
+    
     const navigate = useNavigate();
     const [registerName, setregisterName] = useState("");
     const [registerMail, setregisterMail] = useState("");
     const [registerPass, setregisterPass] = useState("");
+
+
+
 
     // Login deparment
     const [loginMail, setloginMail] = useState("");
@@ -51,7 +56,9 @@ export const Login = () => {
           
             
             alert("U logged in succesfully");
-            navigate('/');
+            // setTimeout(()=>window.location='http://localhost:3000/',10000);
+            window.location='http://localhost:3000/'
+
           }
           else{
             alert("Wrong login credentials ..try again ")
@@ -70,7 +77,7 @@ export const Login = () => {
       <img class="img1"  src={logo2} href="#" />
         <div class="container1" id="container1">
             <div class="form-container sign-up-container">
-                <form action="#">
+                <form className="formL" action="#">
                     <h1>Create Account</h1>
                     <div class="social-container">
                         {/* <a href="#" class="social"><i class="fab fa-facebook-f"></i></a> */}
@@ -85,7 +92,7 @@ export const Login = () => {
                 </form>
             </div>
 	        <div class="form-container sign-in-container">
-		        <form action="#">
+		        <form className="formL" action="#">
 			        <h1 className="fr">Sign in</h1>
 			        <div class="social-container">
 				        {/* <a href="#" class="social"><i class="fab fa-facebook-f"></i></a> */}

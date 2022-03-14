@@ -116,7 +116,7 @@ button.ghost {
 	border-color: #FFFFFF;
 }
 
-form {
+.formL {
 	background-color: #FFFFFF;
 	display: flex;
 	align-items: center;
