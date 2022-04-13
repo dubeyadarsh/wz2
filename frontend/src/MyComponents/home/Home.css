@@ -14,14 +14,37 @@
     position: relative;
     margin-top: 50%;
 }
-.newP, .view{
+.newP, .view {
     display: none;
     min-height: 85vh;
-    min-width: 50vw;
+    min-width: 55vw;
     position: absolute;
     margin: auto;
     left: 10%;
     top: 3%;
     background-color: rgba(11, 103, 241, 0.514);
     border-radius: 20px;
+}
+.projectBox{
+    border-radius: 20px;
+    margin-left: 5%;
+    margin-top: 2px;
+    background-color: rgba(149, 201, 201, 0.664);
+    min-height: 150px !important;
+    /* height: 150px; */
+}
+.vie{
+overflow-y: scroll;
+/* height: 85vh; */
+}
+.viewTask{
+    display: none;
+    min-height: 85vh;
+    min-width: 60vw;
+   
+    margin: 1%;
+    background-color: rgba(11, 103, 241, 0.514);
+    border-radius: 20px;
+    overflow-y: scroll;
+ 
 }

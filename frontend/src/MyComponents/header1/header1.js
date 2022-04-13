@@ -5,6 +5,10 @@ import { useState, useEffect } from 'react';
 import Axios from 'axios';
 import { Navigate } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import {FaPaperPlane } from 'react-icons/fa';
+import {FaCheck } from 'react-icons/fa';
+import {FaTimes } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 export const Header1 = () => {
     let navigate=useNavigate();
     const style={
@@ -12,10 +16,12 @@ export const Header1 = () => {
         color:"#000080"
     }
     const [user,setUser]=useState({});
+    const [requests,setrequests]=useState([]);
     useEffect(()=>{
         Axios.get("http://localhost:3001/profile").then((response)=>{
           // console.log(response);
         setUser(response.data);
+       
       });
          });
 
@@ -35,36 +41,52 @@ export const Header1 = () => {
         if(check=='flex'){
             document.getElementById("containerPr").style.display="none";
         }else{
+          document.getElementById("containerReq").style.display="none";
             document.getElementById("containerPr").style.display="flex";
         }
         
       }
+      function showRequest(){
+        Axios.get("http://localhost:3001/profile").then((response)=>{
+          // console.log(response);
+        
+        setrequests(response.data.requests);
+      });
+        var check=document.getElementById("containerReq").style.display;
+        if(check=='flex'){
+            document.getElementById("containerReq").style.display="none";
+        }else{
+            document.getElementById("containerReq").style.display="flex";
+        }
+        
+      }
+      function  Accept(projectid,fid){
+        console.log(projectid+" "+fid)
+    
+        Axios.post("/acceptRequest",{projectid:projectid,friendid:fid}).then((response)=>{
+            alert("Accepted");
+        })
+     }
+     function  Remove(projectid,fid){
+      console.log(projectid+" "+fid)
+  
+      Axios.post("/removeRequest",{projectid:projectid,friendid:fid}).then((response)=>{
+          alert("removed");
+      })
+   }
   return <div>
       <nav class="he navbar fw-bold  navbar-expand-lg navbar-light shadow-sm">
-  <img class="navbar-brand img-fluid head"  src={logo} href="#" />
-  {/* <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon navbar-toggler-danger"></span>
-  </button> */}
- 
-
-  {/* <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav ml-auto">
-      <li class="nav-item ml-auto  active">
-        <a class="nav-link " href="#" style={style}>About <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item ml-auto">
-        <a class="nav-link" href="#" style={style}>LogIn </a>
-      </li>
-      <li class="nav-item ml-auto">
-        <a class="nav-link" href="#" style={style}>Signup</a>
-      </li>
-     
-    </ul>
-    <i class="fa fa-user" aria-hidden="true"></i>
-  </div> */}
+  <Link to="/">
+  <img class="navbar-brand img-fluid head"  src={logo} href="#" /></Link>
+  <div className="msgboxUser">
+  <a id='pr' className='user fa-icon d-block text-center mx-1' onClick={showRequest}>
+      <FaPaperPlane className='h-50 w-50  mt-2 mr-1' />
+   </a>
   <a id='pr' className='user fa-icon d-block text-center' onClick={show}>
     <i class="iconic fa fa-user mt-1 fa-2x"  aria-hidden="true"></i>
   </a>
+  </div>
+  
   <div id='containerPr' class="containerpr">
   <div className='text-center'>
   <div id='pr' className='inneruser fa-icon d-block text-center'>
@@ -86,7 +108,24 @@ export const Header1 = () => {
   </div>
   </div>
   </div>
-
+  <div id='containerReq' class="row containerReq" style={{overflowY: "scroll", height:"400px"}}>
+  <div className="col-12">
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos accusantium nam incidunt quaerat recusandae delectus quae consequatur, at suscipit repellat corrupti voluptate dolorem explicabo quod reprehenderit tenetur pariatur possimus est fuga minus odit error molestias ducimus! Error mollitia accusamus explicabo animi consequatur quaerat neque exercitationem deserunt, architecto cumque aut quos, excepturi minus suscipit vel! Natus error tempore temporibus nulla quaerat doloribus accusantium nobis dicta odio adipisci deserunt, laborum fugiat. Beatae, similique temporibus! Eos amet sed, praesentium qui provident eveniet quam suscipit odio animi consectetur ex ducimus aperiam est magni deleniti, voluptatibus quos consequuntur tempora iusto earum placeat iste libero commodi?</p>
+  {
+        
+        requests.map((val,key)=>{
+          return<>
+          <div className="row pt-2 pl-2 ">
+          <h4> {val.projectid}  </h4>
+          <button className='btn btnReq btn-success ml-5'  onClick={()=>{Accept(val.projectid,val._id)}}><FaCheck /></button> 
+           <button className='btn btnReq btn-danger' onClick={()=>{Remove(val.projectid,val._id)}}><FaTimes /> </button>
+          </div>
+          <hr style={{color:"black"}}/>
+          </>
+         })
+      }
+        </div>
+  </div>
 </nav>
   </div>;
 };

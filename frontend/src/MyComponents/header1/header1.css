@@ -15,12 +15,19 @@
     height: 45px;
     width: 45px;
     border-radius: 50%;
+    /* position: absolute; */
+    align-items: center;
+    /* right: 5%; */
+    cursor: pointer;
+}
+.msgboxUser{
+    display: flex;
+    flex-direction: row;
+    
     position: absolute;
     align-items: center;
     right: 5%;
-    cursor: pointer;
 }
-
 .inneruser{
     background-color: rgb(90, 207, 168);
     height: 45px;
@@ -64,9 +71,31 @@
   @media screen and (max-width: 768px){
    .containerpr{
        margin-top: 320px;
-       height: 250px;
+      
    }
    .br{
        width: 100%;
    }
+   /* .btnReq{
+       height: 25px
+
+   } */
 }
+
+#containerReq{
+    display: none;
+}
+.containerReq {
+    border-radius: 10px;
+    position: absolute;
+    z-index: 1;
+    right: 5%;
+    background: #dddddd;
+ 
+    /* border: 1px solid #dddddd; */
+    margin-top: 450px !important;
+    /* height: 200px; */
+    width: 270px;
+  }
+  
+ 

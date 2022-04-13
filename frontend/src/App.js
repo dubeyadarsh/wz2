@@ -6,7 +6,7 @@ import Page1  from './MyComponents/page1/page1';
 import {Login}  from './MyComponents/login/login'; 
 import { BrowserRouter as Router,Routes ,Route} from "react-router-dom";
 import Home  from './MyComponents/home/Home'; 
-
+import Details  from './MyComponents/home/Details'; 
 function App() {
   const [isAuth, setisAuth] = useState(false);
   useEffect(() => {
@@ -27,6 +27,8 @@ function App() {
           {/* <Route exact path="/" element={isAuth?<Home />:<Page1 />} /> */}
           <Route path="/login" element={<Login />} />
           {/* <Route path="/home" element={<Home />} /> */}
+          <Route path="/Details" element={<Details />} />
+
 		 	</Routes>
 		 </Router>
   );

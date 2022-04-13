@@ -5,7 +5,7 @@ import Footer from '../footer/footer.js';
 import { useState, useEffect } from 'react';
 import './Home.css';
 import { Link } from 'react-router-dom';
-
+import {FaCheck } from 'react-icons/fa';
  const Home = () => {
    
    const [pname, setPname] = useState("");
@@ -15,21 +15,34 @@ import { Link } from 'react-router-dom';
    const [eDate, setEdate] = useState(null);
 
    const [projects,setprojects]=useState([]);
+   const [tasks,settasks]=useState([]);
 
    useEffect(()=>{
       Axios.get("http://localhost:3001/profile").then((response)=>{
           // console.log(response.data.project);
           setprojects(response.data.project);
+         
       });
        });
 
    function newProject(){
       document.getElementById("view").style.display="none";
       document.getElementById("newP").style.display="flex";
+      document.getElementById("viewTask").style.display="none";
   }
   function view(){
    document.getElementById("newP").style.display="none";
    document.getElementById("view").style.display="flex";
+   document.getElementById("viewTask").style.display="none";
+}
+function viewTask(){
+   document.getElementById("newP").style.display="none";
+   document.getElementById("view").style.display="none";
+   document.getElementById("viewTask").style.display="flex";
+   Axios.get("http://localhost:3001/profile").then((response)=>{
+      settasks(response.data.tasks);
+  });
+ 
 }
 
 function createProject(e){
@@ -40,7 +53,12 @@ function createProject(e){
             alert("done");
         })
 }
-
+function TaskSuccess(id,project){
+        console.log("tasl",id,project);
+        Axios.post("/successTask",{project:project,id:id}).then((response)=>{
+            alert("Task successfully done !");
+        })
+}
   return<>
   < Header1 />
   
@@ -53,8 +71,8 @@ function createProject(e){
             <button href="#" onClick={view} class="btn btn-lg m-3 w-75 btn-rounded btn-info">
                      View Project
             </button>
-            <button href="#" class="btn btn-lg m-3 w-75 btn-rounded btn-info">
-                     Create Task
+            <button href="#"  onClick={viewTask}  class="btn btn-lg m-3 w-75 btn-rounded btn-info">
+                     View Task
             </button>
          </div>
       </div>
@@ -96,17 +114,68 @@ function createProject(e){
                      </form>
                   </div>
          </div>
-         <div id='view' className='view'>
-            <h4 className='mx-auto'>View Projects</h4>
+         <div id='view' className='vie'>
+         <div className="row w-100">
             {
                projects.map((val,key)=>{
-                     return <Link to="/Details"  state={{projects:projects,projectid:val._id}} className='btn'>
-                        <h1>{val._id} </h1>
-                        <h4>{val.status}</h4>
-                        </Link>
+                  
+                     return(
+                     <div className='col-md-5  col-12 projectBox'>
+                     
+                        <h6>{val._id}</h6>
+                        <h10>{val.description}</h10>
+                        <div>
+                        <span> From <i className='mr-2'>{val.sdate==null?"":val.sdate.split("T")[0]} </i>  To  <i className='text-danger'> {val.edate==null?"":val.edate.split("T")[0]}</i> </span>
+
+                        </div>
+                        <div  style={{display:"flex",flexDirection:"row",justifyContent:"space-between"}}>
+                        <Link to="#" className='btn btn-danger'  > X </Link>
+                        <Link to="/Details" state={{projectid:val._id,sdate:val.sdate,edate:val.edate}}  className='btn btn-success'  > view </Link>
+
+                        </div>
+
+                     </div>
+                     
+                   
+                     
+               )})
+               
+            }
+           </div>
+         </div>
+         <div id='viewTask' className='viewTask'>
+         <div className="row w-100">
+            <div className="col">
+            {
+               tasks.map((val,key)=>{
+                return (
+                   <div className="container bg-light ml-3 mt-1">
+                      <h2 className="text-center">{val.project}</h2>
+                    <div className="row ">
+                   <div className="col-8">
+                  <div><h6><strong> Task Name: </strong> <i> {val.taskname} </i></h6> </div>
+                  <div><h6><strong> Description: </strong> <i>  Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, maiores.</i>
+                  </h6> </div>
+                  
+
+                  </div>  
+
+
+                  <div className="col-4">
+                     <h6> <strong> Status : </strong> {val.status==null? <i className='text-danger'> "Pending" </i> :<i className='text-success'> "Finished" </i>}</h6>
+                     <div><strong> From </strong> <i className='mr-2'>{val.sdate==null?"":val.sdate.split("T")[0]} </i></div>
+                     <div> <strong>  To </strong>  <i className='text-danger'> {val.edate==null?"":val.edate.split("T")[0]}</i> </div>
+                     <div className="btn btn-success mx-5 mt-2 mb-1 w-50" onClick={()=>{TaskSuccess(val.userid,val.project)}}><FaCheck /></div>
+                  </div>
+                  
+                  </div>
+               </div>
+                
+               );
                })
             }
-            
+            </div>
+           </div>
          </div>
       </div>
   </div>
