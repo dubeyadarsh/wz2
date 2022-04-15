@@ -29,8 +29,10 @@ import {FaCheck } from 'react-icons/fa';
       document.getElementById("view").style.display="none";
       document.getElementById("newP").style.display="flex";
       document.getElementById("viewTask").style.display="none";
+      
   }
   function view(){
+     
    document.getElementById("newP").style.display="none";
    document.getElementById("view").style.display="flex";
    document.getElementById("viewTask").style.display="none";
@@ -52,6 +54,8 @@ function createProject(e){
         Axios.post("/newproject",{projectid:pname,sDate:sDate,eDate:eDate,status:pstatus,descp:pdescp}).then((response)=>{
             alert("done");
         })
+        alert("Project Added Successfully !!");
+        window.location.reload();
 }
 function TaskSuccess(id,project,taskid){
         console.log("tasl",id,project,taskid);
@@ -129,8 +133,8 @@ function TaskSuccess(id,project,taskid){
 
                         </div>
                         <div  style={{display:"flex",flexDirection:"row",justifyContent:"space-between"}}>
-                        <Link to="#" className='btn btn-danger'  > X </Link>
-                        <Link to="/Details" state={{teamMember:val.sentRequest,tasks:val.tasks,projectid:val._id,sdate:val.sdate,edate:val.edate,descp:val.description}}  className='btn btn-success'  > view </Link>
+                        {/* <Link to="#" className='btn btn-danger'  > X </Link> */}
+                        {val.admin?<Link to="/Details" state={{teamMember:val.sentRequest,tasks:val.tasks,projectid:val._id,sdate:val.sdate,edate:val.edate,descp:val.description}}  className='btn btn-success'  > view </Link>:<div></div>}
 
                         </div>
 

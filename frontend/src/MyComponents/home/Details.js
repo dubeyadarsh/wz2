@@ -78,6 +78,8 @@ function pie(){
     alert("task added succesfullly");
   })
   document.getElementById("wrapper").style.display="none";
+  settname("");
+  settdescp("");
  }
  function getName(id){
    
@@ -163,7 +165,7 @@ function pie(){
       </div>
       <div class="form-group ">
                            <label >Task Description</label>
-                           <textarea className='w-75' value={tdescp}  onChange={(e)=>settdescp(e.target.value)} type="text" class="form-control" placeholder="Enter task Name" > </textarea>
+                           <textarea className='w-75' value={tdescp}  onChange={(e)=>settdescp(e.target.value)} type="text" class="form-control" placeholder="Enter task description" > </textarea>
       </div>
       <div class="form-group">
                            <label for="exampleInputPassword1">Assigned To</label>

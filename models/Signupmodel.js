@@ -54,6 +54,9 @@ project:[{
       type:String,
       // unique:true
    },
+   admin:{
+      type:Boolean,
+   },
    status:{
       type:String
    },

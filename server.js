@@ -1,7 +1,4 @@
 
-
-
-
 const express=require("express");
 const app=express();
 const cors=require("cors");
@@ -124,6 +121,7 @@ app.post("/newproject",async(req,res)=>{
     { $push: { 
               project: {
                 _id :projectid,
+                admin :true,
                 status:status,
                 sdate:sDate,
                 edate:eDate,
