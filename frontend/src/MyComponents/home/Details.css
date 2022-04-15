@@ -1,0 +1,48 @@
+.pdesc{
+    
+    border-top: 2px solid rgb(0,123,255);;
+    box-sizing: border-box;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+}
+.piedesc{
+    
+   
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 30px 90px;
+}
+
+.avatar {
+    vertical-align: middle;
+    margin-left: 5%;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+   
+  }
+#wrapper{
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+} 
+#taskbox{
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 50%; 
+    min-height: 360px;
+    border-radius: 15px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;}
+@media screen and (max-width: 900px){
+    #taskbox{
+        width: 90% !important;
+    }
+}
+
+ 

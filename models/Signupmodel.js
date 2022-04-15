@@ -27,14 +27,27 @@ const SignupSchema=new mongoose.Schema({
    projectid:{
       type:String
    },
-   
+   descp:{
+      type:String
+   },
+   sdate:{
+      type:String
+   },
+   edate:{
+      type:String
+   }
 }
  ],
  tasks:[
    {taskname:{type:String},sdate:{type:Date},
    edate:{type:Date},
    project:{type:String},
-   userid:{type:String}}
+   userid:{type:String},
+   username:{type:String},
+   status:{type:String},
+   tdescp:{type:String}
+}
+   
  ],
 project:[{
    _id:{
@@ -53,19 +66,22 @@ project:[{
    description:{
       type:String
    },
+ 
    sentRequest:[{
       _id:{type: String},
-      username: {type: String},
-      requestid: {
-      type:String
-      }
+      username: {type: String}
    
-   }
+   },
 ],
+requestid:{
+   type:String
+},
 tasks:[{
    taskname:{type:String},
    sdate:{type:Date},
    edate:{type:Date},
+   status:{type:String},
+   tdescp:{type:String},
    assignTo:{name:{type:String},id:{type:String}}
   }]
    }],

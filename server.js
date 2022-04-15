@@ -142,18 +142,12 @@ app.post("/sentReq",async(req,res)=>{
   const friendid=req.body.friendid;
   const friendname=req.body.friendname;
   const projectid=req.body.projectid;
-
+  const sdate=req.body.sdate;
+  const edate=req.body.edate;
+  const descp=req.body.descp;
  console.log(userid+" "+friendid)
 console.log("you sent req to", friendname)
- user.findOneAndUpdate(
-  {_id:userid},
-  { $push: { 
-    
-        'project.$[project].sentRequest':{_id:friendid,username:friendname}
-      } 
-
-  },
-  {arrayFilters:[{'project._id':projectid}]}).exec()
+ 
  
  user.findOneAndUpdate(
   { _id:friendid }, 
@@ -161,7 +155,10 @@ console.log("you sent req to", friendname)
     $push:{requests:{
       _id:userid,
       projectid:projectid,
-      username:name
+      username:name,
+      descp:descp,
+      sdate:sdate,
+      edate:edate
     }
   }
 },
@@ -182,18 +179,34 @@ app.get("/fetchAll",(req,res)=>{
 app.post("/acceptRequest",(req,res)=>{
   
   const userid=req.user.id;
+  const username=req.user.name;
   const projectid=req.body.projectid;
  const friendid=req.body.friendid;
- console.log("You are getting called",userid,friendid)
+ const sdate=req.body.sdate;
+ const edate=req.body.edate;
+ const descp=req.body.descp;
+ console.log("You are getting called",username,descp ,userid,friendid)
  user.findOneAndUpdate(
   { _id:userid }, 
   { $push: { 
             project: {
               _id :projectid,
-              requestid:friendid
+              requestid:friendid,
+              sdate:sdate,
+              edate:edate,
+              description:descp
               }  
           } 
   }).exec()
+  user.findOneAndUpdate(
+    {_id:friendid},
+    { $push: { 
+      
+          'project.$[project].sentRequest':{_id:userid,username:username}
+        } 
+  
+    },
+    {arrayFilters:[{'project._id':projectid}]}).exec()
   user.findOneAndUpdate(
     { _id:userid }, 
     { $pull: { 
@@ -203,9 +216,7 @@ app.post("/acceptRequest",(req,res)=>{
                 }  
             } 
     }).exec()
-  // user.findOneAndUpdate({_id:userid},
-  //   { $pull: { 'requests': { '_id': friendid} } }
-  //   ).exec()
+
       res.redirect("/removeRequest")
 });
 app.post("/removeRequest",(req,res)=>{
@@ -228,20 +239,22 @@ app.post("/removeRequest",(req,res)=>{
 });
 app.post("/addTask",(req,res)=>{
 const tname=req.body.tname;
+const tdescp=req.body.tdescp;
 const personid=req.body.tperson;
 const userid=req.user.id;
 const username=req.user.name;
 const projectid=req.body.pid;
 const sdate=req.body.sdate;
 const edate=req.body.edate;
+const pname=req.body.pname;
 
-
-console.log("det is", tname,userid,personid,projectid,sdate,edate);
+const mid=new mongoose.Types.ObjectId();
+console.log("det is", pname,tdescp,tname,userid,personid,projectid,sdate,edate);
 user.findOneAndUpdate(
   {_id:userid},
   { $push: { 
     
-        'project.$[project].tasks':{taskname:tname,sdate:sdate,edate:edate,assignTo:{name:"",id:personid}}
+        'project.$[project].tasks':{_id:mid,taskname:tname,tdescp:tdescp,sdate:sdate,edate:edate,status:"",assignTo:{name:pname,id:personid}}
       } 
 
   },
@@ -250,10 +263,12 @@ user.findOneAndUpdate(
     { _id:personid }, 
     { $push: { 
               tasks: {
+                _id:mid,
                 userid :userid,
                 username:username,
                 project:projectid,
                 taskname:tname,
+                tdescp:tdescp,
                 sdate:sdate,
                 edate:edate,
                 
@@ -263,14 +278,41 @@ user.findOneAndUpdate(
 });
 app.post("/findbyid",(req,res)=>{
   const id=req.body.id;
-  user.findById(personid, function (err, docs) {
+  user.findById(id, function (err, docs) {
     if (err){
         console.log(err);
         
     }
-        res.send(docs);
+        res.send(docs.name);
     
   });
+})
+app.post("/successTask",(req,res)=>{
+  const id=req.body.id;
+  const taskid=req.body.taskid;
+  const project=req.body.project;
+  const userid=req.user.id;
+  console.log(id,taskid,project)
+  user.findOneAndUpdate(
+    {_id:userid},
+    { $set: { 
+      
+          'tasks.$[t].status':"finished"
+        } 
+  
+    },
+    {arrayFilters:[{'t._id':taskid}]}).exec()
+  
+  user.findOneAndUpdate(
+    {_id:id},
+    { $set: { 
+      
+          'project.$[project].tasks.$[task].status':"finished"
+        } 
+  
+    },
+    {arrayFilters:[{'project._id':project},{'task._id':taskid}]}).exec()
+ 
 })
 app.listen(port,()=>{
     console.log("Server running at port 3001");

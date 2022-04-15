@@ -46,6 +46,8 @@ export const Login = () => {
         e.preventDefault();
         console.log(registerName+" "+registerMail+" "+registerPass);
         Axios.post("/register",{registerName:registerName,registerMail:registerMail,registerPass:registerPass});
+
+        alert("Successfully Registered.. Now login !")
     }
 
     function Signin(e){

@@ -53,9 +53,9 @@ function createProject(e){
             alert("done");
         })
 }
-function TaskSuccess(id,project){
-        console.log("tasl",id,project);
-        Axios.post("/successTask",{project:project,id:id}).then((response)=>{
+function TaskSuccess(id,project,taskid){
+        console.log("tasl",id,project,taskid);
+        Axios.post("/successTask",{project:project,id:id,taskid:taskid}).then((response)=>{
             alert("Task successfully done !");
         })
 }
@@ -130,7 +130,7 @@ function TaskSuccess(id,project){
                         </div>
                         <div  style={{display:"flex",flexDirection:"row",justifyContent:"space-between"}}>
                         <Link to="#" className='btn btn-danger'  > X </Link>
-                        <Link to="/Details" state={{projectid:val._id,sdate:val.sdate,edate:val.edate}}  className='btn btn-success'  > view </Link>
+                        <Link to="/Details" state={{teamMember:val.sentRequest,tasks:val.tasks,projectid:val._id,sdate:val.sdate,edate:val.edate,descp:val.description}}  className='btn btn-success'  > view </Link>
 
                         </div>
 
@@ -154,7 +154,7 @@ function TaskSuccess(id,project){
                     <div className="row ">
                    <div className="col-8">
                   <div><h6><strong> Task Name: </strong> <i> {val.taskname} </i></h6> </div>
-                  <div><h6><strong> Description: </strong> <i>  Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, maiores.</i>
+                  <div><h6><strong> Description: </strong> <i>{val.tdescp==null?"Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, maiores.":val.tdescp}</i>
                   </h6> </div>
                   
 
@@ -165,7 +165,7 @@ function TaskSuccess(id,project){
                      <h6> <strong> Status : </strong> {val.status==null? <i className='text-danger'> "Pending" </i> :<i className='text-success'> "Finished" </i>}</h6>
                      <div><strong> From </strong> <i className='mr-2'>{val.sdate==null?"":val.sdate.split("T")[0]} </i></div>
                      <div> <strong>  To </strong>  <i className='text-danger'> {val.edate==null?"":val.edate.split("T")[0]}</i> </div>
-                     <div className="btn btn-success mx-5 mt-2 mb-1 w-50" onClick={()=>{TaskSuccess(val.userid,val.project)}}><FaCheck /></div>
+                     <div className="btn btn-success mx-5 mt-2 mb-1 w-50" onClick={()=>{TaskSuccess(val.userid,val.project,val._id)}}><FaCheck /></div>
                   </div>
                   
                   </div>
