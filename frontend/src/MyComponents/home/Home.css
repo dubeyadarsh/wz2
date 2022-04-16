@@ -48,3 +48,11 @@ overflow-y: scroll;
     overflow-y: scroll;
  
 }
+.avatar {
+    vertical-align: middle;
+    margin-left: 5%;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+   
+  }

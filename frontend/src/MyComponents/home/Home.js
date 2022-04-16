@@ -5,6 +5,7 @@ import Footer from '../footer/footer.js';
 import { useState, useEffect } from 'react';
 import './Home.css';
 import { Link } from 'react-router-dom';
+import project from "../img/project.png"
 import {FaCheck } from 'react-icons/fa';
  const Home = () => {
    
@@ -124,6 +125,7 @@ function TaskSuccess(id,project,taskid){
                projects.map((val,key)=>{
                   
                      return(
+                        <>
                      <div className='col-md-5  col-12 projectBox'>
                      
                         <h6>{val._id}</h6>
@@ -132,14 +134,15 @@ function TaskSuccess(id,project,taskid){
                         <span> From <i className='mr-2'>{val.sdate==null?"":val.sdate.split("T")[0]} </i>  To  <i className='text-danger'> {val.edate==null?"":val.edate.split("T")[0]}</i> </span>
 
                         </div>
-                        <div  style={{display:"flex",flexDirection:"row",justifyContent:"space-between"}}>
+                        <div  style={{display:"flex",flexDirection:"row",justifyContent:"flex-end"}}>
                         {/* <Link to="#" className='btn btn-danger'  > X </Link> */}
-                        {val.admin?<Link to="/Details" state={{teamMember:val.sentRequest,tasks:val.tasks,projectid:val._id,sdate:val.sdate,edate:val.edate,descp:val.description}}  className='btn btn-success'  > view </Link>:<div></div>}
+                        {val.admin?<Link to="/Details" state={{teamMember:val.sentRequest,tasks:val.tasks,projectid:val._id,sdate:val.sdate,edate:val.edate,descp:val.description}}  className='  mx-end btn btn-success text-end'  ><strong> View </strong> </Link>:<div className='btn btn-warning m-1 mt-3 '><strong>#NotAnAdmin </strong> </div>}
 
                         </div>
 
                      </div>
                      
+                     </>
                    
                      
                )})

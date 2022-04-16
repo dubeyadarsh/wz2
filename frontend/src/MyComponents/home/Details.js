@@ -56,9 +56,18 @@ function pie(){
    function fetchAll(e){
     e.preventDefault();
   Axios.get("/fetchAll").then((res)=>{
-   console.log(res.data);
+  //  console.log(res.data[0]._id);
    console.log(props.tasks)
-   setAllUser(res.data);
+
+   for(var i=0;i<res.data.length;i++){
+     for(var j=0;j<tpersons.length;j++){
+       if(res.data[i]._id!=tpersons[j]._id){
+         console.log("Executed")
+         setAllUser([...allusers,res.data[i]]);
+       } 
+     }
+   }
+  //  setAllUser(res.data);
   })
    }
    function sentRequest(friendid,friendname){
@@ -78,8 +87,6 @@ function pie(){
     alert("task added succesfullly");
   })
   document.getElementById("wrapper").style.display="none";
-  settname("");
-  settdescp("");
  }
  function getName(id){
    
@@ -156,7 +163,7 @@ function pie(){
       })
     }
     </div>
-    <h4>Assign task</h4>
+    
     <div id="wrapper">
     <div id="taskbox" className="container">
     <div class="form-group ">
@@ -165,7 +172,7 @@ function pie(){
       </div>
       <div class="form-group ">
                            <label >Task Description</label>
-                           <textarea className='w-75' value={tdescp}  onChange={(e)=>settdescp(e.target.value)} type="text" class="form-control" placeholder="Enter task description" > </textarea>
+                           <textarea className='w-75' value={tdescp}  onChange={(e)=>settdescp(e.target.value)} type="text" class="form-control" placeholder="Enter task Name" > </textarea>
       </div>
       <div class="form-group">
                            <label for="exampleInputPassword1">Assigned To</label>
